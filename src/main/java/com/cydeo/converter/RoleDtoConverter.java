@@ -16,7 +16,7 @@ public class RoleDtoConverter implements Converter<String, RoleDTO> {
     public RoleDtoConverter(@Lazy RoleService roleService) {
         this.roleService = roleService;
     }
-// @Lazy do not inject until requested
+// @Lazy do not inject until requested. We need it only when we save a user, no need to inject anything before that
     @Override
     public RoleDTO convert(String source) {
 
