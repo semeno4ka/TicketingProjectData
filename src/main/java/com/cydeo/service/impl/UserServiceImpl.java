@@ -13,7 +13,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@Transactional// will roll back all methods if any error occurs
+//@Transactional// will roll back all methods if any error occurs. Delete, Insert, Update etc actions
+//@Modifying is used with JPQL and SQL queries and is same as Transactional (method level)
 public class UserServiceImpl implements UserService {
     final private UserRepository userRepository;
     final private UserMapper userMapper;
@@ -42,6 +43,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteByUserName(String username) {
       userRepository.deleteByUserName(username);
+    }
+
+    @Override
+    public void delete(String username) {
+        User user=userRepository.findByUserName(username);
+        user.setIsDeleted(true);
+        userRepository.save(user);
     }
 
     @Override
