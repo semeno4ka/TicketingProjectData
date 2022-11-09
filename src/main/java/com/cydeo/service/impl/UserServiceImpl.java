@@ -7,11 +7,13 @@ import com.cydeo.repository.UserRepository;
 import com.cydeo.service.UserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Transactional// will roll back all methods if any error occurs
 public class UserServiceImpl implements UserService {
     final private UserRepository userRepository;
     final private UserMapper userMapper;
@@ -39,6 +41,20 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteByUserName(String username) {
+      userRepository.deleteByUserName(username);
+    }
+
+    @Override
+    public UserDTO update(UserDTO userDto) {
+        //find current user
+        User user1=userRepository.findByUserName(userDto.getUserName());
+        //Convert to Entity
+        User convertedUser=userMapper.convertToEntity(userDto);//doesn't have id
+        //to avoid creating another user with new ID, we set the ID from previous
+        convertedUser.setId(user1.getId());
+        //save updated
+        userRepository.save(convertedUser);
+        return findByUserName(userDto.getUserName());//why do we return username?
 
     }
 }
