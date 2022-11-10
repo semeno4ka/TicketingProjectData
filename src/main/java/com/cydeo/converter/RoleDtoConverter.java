@@ -8,7 +8,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
 @Component
-@ConfigurationPropertiesBinding
+@ConfigurationPropertiesBinding// requires @Lazy if configuration used. Without config. @Lazy not required
 public class RoleDtoConverter implements Converter<String, RoleDTO> {
 
     RoleService roleService;
