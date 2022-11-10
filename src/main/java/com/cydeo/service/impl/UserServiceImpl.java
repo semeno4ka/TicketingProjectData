@@ -32,7 +32,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDTO findByUserName(String username) {
-        return userMapper.convertToDTO(userRepository.findByUserName(username));
+        User user = userRepository.findByUserName(username);
+        return userMapper.convertToDTO(user);
     }
 
     @Override
@@ -64,5 +65,11 @@ public class UserServiceImpl implements UserService {
         userRepository.save(convertedUser);
         return findByUserName(userDto.getUserName());//why do we return username?
 
+    }
+
+    @Override
+    public List<UserDTO> listAllByRole(String role) {
+        List<User> users= userRepository.findByRoleDescriptionIgnoreCase(role);
+        return users.stream().map(userMapper::convertToDTO).collect(Collectors.toList());
     }
 }

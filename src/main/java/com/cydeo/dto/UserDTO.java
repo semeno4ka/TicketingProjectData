@@ -1,17 +1,25 @@
 package com.cydeo.dto;
 
 import com.cydeo.enums.Gender;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.validation.constraints.*;
 
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class UserDTO {
 
+    private Long id;
+    // we added this field because when mapping, mapper works field to field and since we didn't have ID it couldn't map it and use as foreign key in manager_id in project table
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     @NotBlank
     @Size(max = 15, min = 2)
     private String firstName;
@@ -25,7 +33,7 @@ public class UserDTO {
     private String userName;
 
     @NotBlank
-  //  @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}")
+    @Pattern(regexp = "(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,}")
     private String passWord;
 
     @NotNull

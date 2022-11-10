@@ -28,7 +28,8 @@ public class RoleServiceImpl implements RoleService {
         //DI required for access
         //List<Role> roleList= roleRepository.findAll();
         //need modelWrapper and method to convert
-        return  roleRepository.findAll().stream().map(roleMapper::convertToDto).collect(Collectors.toList());
+        List<Role> roleList = roleRepository.findAll();
+        return roleList.stream().map(roleMapper::convertToDto).collect(Collectors.toList());
     }
 
     @Override

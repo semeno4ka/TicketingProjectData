@@ -14,7 +14,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name="projects")
 @Where(clause = "is_deleted=false")
@@ -37,5 +36,7 @@ public class Project extends BaseEntity {
     @ManyToOne(fetch=FetchType.LAZY)// one manager many projects
     @JoinColumn(name="manager_id")
     private User assignedManager;
+
+    private Boolean isDeleted=false;
 
 }
