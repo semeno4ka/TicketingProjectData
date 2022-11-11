@@ -17,13 +17,13 @@ public class BaseEntity {
     private Long id;
 
     private Boolean isDeleted=false;
-   @Column(nullable = false,updatable = false)
+ @Column(nullable = false,updatable = false)
     private LocalDateTime insertDateTime;// the field cannot be null/ whenever update, do not do action on this field
-    @Column(nullable = false,updatable = false)
+ @Column(nullable = false,updatable = false)
     private Long insertUserId;
-  @Column(nullable = false)
+@Column(nullable = false)
     private LocalDateTime lastUpdateDateTime;
-    @Column(nullable = false)
+@Column(nullable = false)
     private Long lastUpdateUserId;
     @PrePersist// will be executed every time you create a user
     private void onPrePersist(){// method to initialize those fields automatically

@@ -2,6 +2,8 @@ package com.cydeo.controller;
 
 import com.cydeo.dto.TaskDTO;
 import com.cydeo.enums.Status;
+import com.cydeo.service.ProjectService;
+import com.cydeo.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -15,14 +17,14 @@ public class TaskController {
 
 //    private final UserService userService;
 //    private final ProjectService projectService;
-//    private final TaskService taskService;
+////    private final TaskService taskService;
 //
 //    public TaskController(UserService userService, ProjectService projectService, TaskService taskService) {
 //        this.userService = userService;
 //        this.projectService = projectService;
 //        this.taskService = taskService;
 //    }
-//
+
 //    @GetMapping("/create")
 //    public String createTask(Model model) {
 //
