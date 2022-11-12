@@ -14,6 +14,8 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ProjectDTO {
 
+    private Long id;// task table need to connect to projectDTO id
+
     @NotBlank
     private String projectName;
 

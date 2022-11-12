@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 @Where(clause = "is_deleted=false")
 public class Project extends BaseEntity {
 
-
+@Column(unique = true)//will not allow us to create another project with same id
     private String projectCode;
     private String projectName;
 
