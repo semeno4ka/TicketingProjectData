@@ -20,8 +20,8 @@ public interface TaskRepository extends JpaRepository<Task,Long> {
     int totalCompletedTask(String projectCode);
 
     List<Task> findAllByProject(Project project);// in derived we can pass entity, in others ID or Code
-    List<Task>findAllByTaskStatusIsNotAndAssignedEmployee(Status status, User entity);
-    List<Task>findAllByTaskStatusAndAssignedEmployee(Status status, User entity);
+    List<Task> findAllByTaskStatusIsNotAndAssignedEmployee(Status status, User user);
+    List<Task> findAllByTaskStatusAndAssignedEmployee(Status status, User user);
 
 
 }

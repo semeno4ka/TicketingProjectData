@@ -21,9 +21,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
-private final UserService userService;
-private final UserMapper userMapper;
-private final TaskService taskService;
+    private final UserService userService;
+    private final UserMapper userMapper;
+    private final TaskService taskService;
 
     public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper, UserService userService, UserMapper userMapper, TaskService taskService) {
         this.projectRepository = projectRepository;
@@ -104,5 +104,12 @@ private final TaskService taskService;
                 obj.setCompleteTaskCounts(taskService.totalCompletedTask(project.getProjectCode()));
                 return  obj;}
         ).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<ProjectDTO> listAllNonCompletedByAssignedManager(UserDTO assignedManager) {
+        List<Project> projects = projectRepository
+                .findAllByProjectStatusIsNotAndAssignedManager(Status.COMPLETE, userMapper.convertToEntity(assignedManager));
+        return projects.stream().map(projectMapper::convertToDTO).collect(Collectors.toList());
     }
 }
