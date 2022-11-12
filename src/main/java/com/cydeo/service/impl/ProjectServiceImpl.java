@@ -73,14 +73,23 @@ private final TaskService taskService;
     public void delete(String projectCode) {
         Project project=projectRepository.findByProjectCode(projectCode);
         project.setIsDeleted(true);
+        project.setProjectCode(project.getProjectCode()+"-"+project.getId());// to make it possible reuse the code when create new project and this one deleted
+        //SP00-1
         projectRepository.save(project);
+
+        taskService.deleteByProject(projectMapper.convertToDTO(project));
     }
+
+
 
     @Override
     public void complete(String projectCode) {
         Project project = projectRepository.findByProjectCode(projectCode);
         project.setProjectStatus(Status.COMPLETE);
         projectRepository.save(project);
+
+        taskService.completeByProject(projectMapper.convertToDTO(project));
+
     }
 
     @Override
