@@ -114,17 +114,17 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public List<TaskDTO> listAllTasksByStatusIsNot(Status status) {
-        UserDTO loggedIn = userService.findByUserName("harold@manager.com");
-        List<Task> tasks=taskRepository.findAllByTaskStatusIsNotAndAssignedEmployee(status, userMapper.convertToEntity(loggedIn));
-
+        UserDTO loggedInUser = userService.findByUserName("john@employee.com");
+        List<Task> tasks = taskRepository.
+                findAllByTaskStatusIsNotAndAssignedEmployee(status, userMapper.convertToEntity(loggedInUser));
         return tasks.stream().map(taskMapper::convertToDTO).collect(Collectors.toList());
     }
 
     @Override
     public List<TaskDTO> listAllTasksByStatus(Status status) {
-        UserDTO loggedIn = userService.findByUserName("harold@manager.com");
-        List<Task> tasks=taskRepository.findAllByTaskStatusAndAssignedEmployee(status, userMapper.convertToEntity(loggedIn));
-
+        UserDTO loggedInUser = userService.findByUserName("john@employee.com");
+        List<Task> tasks = taskRepository.
+                findAllByTaskStatusAndAssignedEmployee(status, userMapper.convertToEntity(loggedInUser));
         return tasks.stream().map(taskMapper::convertToDTO).collect(Collectors.toList());
     }
 }
