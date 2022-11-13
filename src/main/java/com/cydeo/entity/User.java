@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Entity
 @Table(name="users")
-@Where(clause = "is_deleted=false")
+//@Where(clause = "is_deleted=false")
 //Any repository which uses THIS ENTITY will add, concate  @where condition to EACH query in repository
 public class User extends BaseEntity {
 
